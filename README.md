@@ -13,16 +13,44 @@ This repository is a reusable template for interactive and batch SLURM jobs.
 You can both download the files or use this repository as a template for your own project. To use it:
 
 1. Edit placeholders in the scripts (values inside `<...>`).
-2. Run interactive mode:
+2. Start an interactive shell when needed:
 
 ```bash
 ./bash.sh
 ```
 
-3. Run batch mode:
+3. Submit a batch job:
 
 ```bash
 sbatch sbatch.sh
+```
+
+## How To Submit With sbatch
+
+1. Edit placeholders in `sbatch.sh`:
+
+- `#SBATCH --account=<project_account>`
+- `conda activate <conda_env_name>`
+- `cd <project_dir>`
+- `python <entrypoint>`
+
+2. Submit the script:
+
+```bash
+sbatch sbatch.sh
+```
+
+3. Check queue/logs:
+
+```bash
+squeue -u $USER
+tail -f logs/job_<job_id>.log
+```
+
+4. Cancel a job if needed:
+
+```bash
+scancel <job_id>
 ```
 
 You can override SBATCH options from the command line when submitting:
@@ -36,6 +64,28 @@ sbatch \
 	--job-name=my_job \
 	sbatch.sh
 ```
+
+## How To Debug In VS Code
+
+This repository includes `.vscode/launch.json` with a Python debug configuration named `debug`.
+
+Recommended workflow on the cluster:
+
+1. Open the project in VS Code (typically via Remote SSH on the cluster).
+2. Request an interactive allocation with:
+
+```bash
+./bash.sh
+```
+
+3. In VS Code, open the Python file you want to debug. Assure that the .vscode/launch.json configuration matches your setup (especially the `${file}` variable, which should point to the file you want to run).
+4. Go to Run and Debug, select `debug`, then start debugging.
+
+Notes:
+
+- The `debug` configuration runs the currently open file (`${file}`) in the integrated terminal.
+- `bash.sh` is useful before debugging because it gives you an allocated interactive compute session.
+- Make sure placeholders in `bash.sh` match your account and requested resources.
 
 ## Customizable Parts
 
