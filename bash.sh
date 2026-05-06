@@ -1,1 +1,8 @@
-srun -Q --immediate=10  --partition=all_serial --account=tesi_gsalici --gres=gpu:1 --time 40:00 --pty bash
+#!/bin/bash
+
+PARTITION="all_serial"
+ACCOUNT="<project_account>"
+TIME="01:00:00"
+GRES="gpu:1"
+
+srun --partition="${PARTITION}" --account="${ACCOUNT}" --time="${TIME}" --gres="${GRES}" --pty /bin/bash
