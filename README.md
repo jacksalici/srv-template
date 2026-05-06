@@ -1,13 +1,16 @@
 # SLURM Template (AImageLab-HPC)
 
-This repository contains the templates for interactive and batch SLURM jobs.
+This repository is a reusable template for interactive and batch SLURM jobs.
 
 ## Files
 
-- `bash.sh`: interactive shell allocation with `srun --pty`.
+- `.vscode/`: VS Code debugging configuration for this template.
+- `bash.sh`: interactive shell allocation with `srun --pty`, also useful when preparing/debugging runs from VS Code.
 - `sbatch.sh`: batch job template for GPU workloads.
 
 ## Quick Start
+
+You can both download the files or use this repository as a template for your own project. To use it:
 
 1. Edit placeholders in the scripts (values inside `<...>`).
 2. Run interactive mode:
